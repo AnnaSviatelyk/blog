@@ -5,6 +5,7 @@
 // import Post from 'path/to/interfaces';
 
 export type Post = {
-  id: number;
-  name: string;
+    id: number;
+    title: string;
+    body: string;
 };
