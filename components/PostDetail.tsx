@@ -1,16 +1,21 @@
-import * as React from 'react'
+import * as React from 'react';
 
-import { User } from '../interfaces'
+import { Post } from '../interfaces';
 
-type ListDetailProps = {
-  item: User
-}
+type PostDetailProps = {
+    item: Post;
+};
 
-const ListDetail = ({ item: user }: ListDetailProps) => (
-  <div>
-    <h1>Detail for {user.name}</h1>
-    <p>ID: {user.id}</p>
-  </div>
-)
+const ListDetail = ({ item: post }: PostDetailProps) => (
+    <div>
+        <h1> {post.title}</h1>
+        <p>{post.body}</p>
+    </div>
+);
 
-export default ListDetail
+// export const getStaticProps: GetStaticProps = async () => {
+//     const items: Post[] = sampleUserData;
+//     return { props: { items } };
+// };
+
+export default ListDetail;

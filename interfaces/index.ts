@@ -9,3 +9,9 @@ export type Post = {
     title: string;
     body: string;
 };
+
+export type State = {
+    items: [];
+    item: {};
+    error: string | null;
+};

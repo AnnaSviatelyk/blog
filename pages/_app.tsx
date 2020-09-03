@@ -1,8 +1,10 @@
+import React, { FC } from 'react';
 import App from 'next/app';
-import { Provider } from 'react-redux';
-import React from 'react';
-import withRedux from 'next-redux-wrapper';
-import store from '../redux/store';
+import { wrapper } from '../redux/store';
+
+// const WrappedApp: FC<AppProps> = ({ Component, pageProps }) => <Component {...pageProps} />;
+
+// export default wrapper.withRedux(WrappedApp);
 
 class MyApp extends App {
     static async getInitialProps({ Component, ctx }: { Component: any; ctx: any }) {
@@ -13,13 +15,8 @@ class MyApp extends App {
     }
     render() {
         const { Component, pageProps } = this.props;
-        return (
-            <Provider store={store}>
-                <Component {...pageProps} />
-            </Provider>
-        );
+        return <Component {...pageProps} />;
     }
 }
 
-const makeStore = () => store;
-export default withRedux(makeStore)(MyApp);
+export default wrapper.withRedux(MyApp);

@@ -1,19 +1,21 @@
-import * as React from 'react';
-import ListItem from './Post';
-import { Post } from '../interfaces';
+import React from 'react';
+import PostItem from './PostItem';
+import { useSelector } from 'react-redux';
 
-type Props = {
-    items: Post[];
+const List = () => {
+    const items = useSelector((state) => {
+        return state.posts.items;
+    });
+
+    return (
+        <ul>
+            {items.map((item) => (
+                <li key={item.id}>
+                    <PostItem data={item} />
+                </li>
+            ))}
+        </ul>
+    );
 };
-
-const List = ({ items }: Props) => (
-    <ul>
-        {items.map((item) => (
-            <li key={item.id}>
-                <ListItem data={item} />
-            </li>
-        ))}
-    </ul>
-);
 
 export default List;
