@@ -1,6 +1,6 @@
 import * as actionTypes from '../actions/actionTypes';
 import { HYDRATE } from 'next-redux-wrapper';
-import { updateObj } from './utility';
+import { updateObj } from '../../utils/utility';
 
 const initialState = {
     items: [],

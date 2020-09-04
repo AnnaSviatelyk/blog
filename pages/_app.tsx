@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import App from 'next/app';
 import { wrapper } from '../redux/store';
+import { Global, css } from '@emotion/core';
 
 // const WrappedApp: FC<AppProps> = ({ Component, pageProps }) => <Component {...pageProps} />;
 
@@ -15,7 +16,38 @@ class MyApp extends App {
     }
     render() {
         const { Component, pageProps } = this.props;
-        return <Component {...pageProps} />;
+        return (
+            <>
+                <Global
+                    styles={css`
+                        html,
+                        body {
+                            padding: 0;
+                            margin: 0;
+
+                            font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
+                                Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+                            background-color: #fafafa;
+                        }
+                        * {
+                            box-sizing: border-box;
+                        }
+
+                        a {
+                            font-size: 18px;
+                            text-decoration: none;
+                            cursor: pointer;
+                        }
+                        p {
+                            line-height: 1.5;
+                            font-size: 16px;
+                            font-weight: 200;
+                        }
+                    `}
+                />
+                <Component {...pageProps} />
+            </>
+        );
     }
 }
 

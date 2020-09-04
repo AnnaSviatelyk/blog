@@ -28,7 +28,8 @@ export const getPosts = () => {
         try {
             const response = await axios.get('https://simple-blog-api.crew.red/posts');
             const fetchedPosts = response.data;
-            dispatch(getPostsSuccess(fetchedPosts));
+            const postsToRender = fetchedPosts.slice(0, 5);
+            dispatch(getPostsSuccess(postsToRender));
         } catch (error) {
             dispatch(getPostsFail(error.message));
         }
@@ -53,7 +54,6 @@ export const retrievePostFail = (error) => {
 export const retrievePost = (id) => {
     return async (dispatch) => {
         try {
-            console.log('djdkl;dlk');
             const response = await axios.get(`https://simple-blog-api.crew.red/posts/${id}?_embed=comments`);
             console.log(response.data);
             dispatch(retrievePostSuccess(response.data));
