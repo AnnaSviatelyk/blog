@@ -1,1 +1,1 @@
-export { getPosts, retrievePost } from './postsActions';
+export { getPosts, retrievePost, addPost } from './postsActions';

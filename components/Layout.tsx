@@ -16,7 +16,7 @@ const ContentContainer = styled.div`
 `;
 const Header = styled.header`
     width: 100%;
-    height: 40px;
+    height: 60px;
 
     display: flex;
     align-items: center;
@@ -27,7 +27,7 @@ const Header = styled.header`
     nav {
         position: absolute;
 
-        right: 40px;
+        right: 120px;
     }
 
     a {
@@ -43,6 +43,15 @@ const Header = styled.header`
             transform: scale(0.9);
         }
     }
+`;
+
+const Logo = styled.p`
+    position: absolute;
+    left: 120px;
+    font-size: 24px;
+    color: #fff;
+
+    cursor: pointer;
 `;
 
 const Nav = styled.nav`
@@ -67,10 +76,10 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
             <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         </Head>
         <Header>
+            <Link href="/">
+                <Logo>MyBlog</Logo>
+            </Link>
             <Nav>
-                <Link href="/">
-                    <a>Home</a>
-                </Link>{' '}
                 <p>Have something to say?</p>
                 <Link href="/posts/new">
                     <a>Create New Post</a>

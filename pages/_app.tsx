@@ -32,7 +32,9 @@ class MyApp extends App {
                         * {
                             box-sizing: border-box;
                         }
-
+                        ul {
+                            margin: 0;
+                        }
                         a {
                             font-size: 18px;
                             text-decoration: none;

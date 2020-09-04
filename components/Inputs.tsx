@@ -1,9 +1,5 @@
 import react, { useState } from 'react';
-import Layout from '../../../components/Layout';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
-import { Heading1 } from '../../../utils/common-styles';
-import * as actions from '../../../redux/actions/index';
 
 const InputsContainer = styled.div`
     display: flex;
@@ -73,57 +69,41 @@ const Button = styled.button`
         cursor: not-allowed;
     }
 `;
-const IndexPage = () => {
+
+const Inputs = () => {
     const [values, setValues] = useState({
         title: '',
         body: '',
     });
 
-    const dispatch = useDispatch();
-
     const inputHandler = (event) => {
         if (event.target.name === 'title') {
             setValues({ ...values, title: event.target.value });
-            console.log(values);
         }
 
         if (event.target.name === 'body') {
             setValues({ ...values, body: event.target.value });
-            console.log(values);
         }
     };
 
-    const submitClickHandler = () => {
-        dispatch(actions.addPost(values));
-        setValues({ ...values, title: '', body: '' });
-    };
-
     return (
-        <Layout title="Create New Post">
-            <Heading1>Share your thoughts...</Heading1>
-            <InputsContainer>
-                <Label>Title</Label>
-                <Input
-                    type="text"
-                    placeholder="Post title here"
-                    name="title"
-                    value={values.title}
-                    onChange={inputHandler}
-                ></Input>
-                <Label>Description</Label>
-                <Input
-                    type="text"
-                    placeholder="Post description here"
-                    name="body"
-                    value={values.body}
-                    onChange={inputHandler}
-                ></Input>
-            </InputsContainer>
-            <Button disabled={values.title.length && values.body.length ? false : true} onClick={submitClickHandler}>
-                Submit
-            </Button>
-        </Layout>
+        <InputsContainer>
+            <Label>Title</Label>
+            <Input
+                type="text"
+                placeholder="Post title here"
+                name="title"
+                value={values.title}
+                onChange={inputHandler}
+            ></Input>
+            <Label>Description</Label>
+            <Input
+                type="text"
+                placeholder="Post description here"
+                name="body"
+                value={values.body}
+                onChange={inputHandler}
+            ></Input>
+        </InputsContainer>
     );
 };
-
-export default IndexPage;

@@ -10,8 +10,9 @@ export type Post = {
     body: string;
 };
 
-export type State = {
+export type PostsState = {
     items: [];
-    item: {};
+    item: {} | null;
     error: string | null;
+    postSuccess: boolean;
 };
