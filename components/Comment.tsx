@@ -8,7 +8,7 @@ import styled from 'styled-components';
 const CommentContainer = styled.div`
     width: 100%;
     padding: 16px;
-    margin: 8px;
+    margin: 0 0 16px 0;
     border-radius: 5px;
     background-color: #fafafa;
     color: #333;

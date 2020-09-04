@@ -1,8 +1,11 @@
 import react, { useState } from 'react';
 import Layout from '../../../components/Layout';
+import Button from '../../../components/Button';
+import Modal from '../../../components/Modal/Modal';
+import ErrorMessage from '../../../components/ErrorMessage';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
-import { Heading1 } from '../../../utils/common-styles';
+import { useSelector, useDispatch } from 'react-redux';
+import { Heading1, Label } from '../../../utils/common-styles';
 import * as actions from '../../../redux/actions/index';
 
 const InputsContainer = styled.div`
@@ -10,12 +13,6 @@ const InputsContainer = styled.div`
     flex-direction: column;
 `;
 
-const Label = styled.label`
-    margin-bottom: 12px;
-    font-size: 16px;
-    font-weight: 200;
-    font-family: sans-serif;
-`;
 const Input = styled.textarea`
     width: 500px;
     height: auto;
@@ -50,33 +47,14 @@ const Input = styled.textarea`
     }
 `;
 
-const Button = styled.button`
-    width: 88px;
-    height: 32px;
-    border: none;
-    background-color: #333;
-    border-radius: 3px;
-    font-family: sans-serif;
-    font-size: 12px;
-    font-weight: 100;
-    color: #fff;
-    text-transform: uppercase;
-    outline: none;
-    transition: all 0.3s;
-    cursor: pointer;
-    &:hover {
-        opacity: 0.9;
-    }
-
-    &:disabled {
-        background-color: #d3d3d3;
-        cursor: not-allowed;
-    }
-`;
 const IndexPage = () => {
     const [values, setValues] = useState({
         title: '',
         body: '',
+    });
+
+    const error = useSelector((state) => {
+        return state.posts.error;
     });
 
     const dispatch = useDispatch();
@@ -84,12 +62,10 @@ const IndexPage = () => {
     const inputHandler = (event) => {
         if (event.target.name === 'title') {
             setValues({ ...values, title: event.target.value });
-            console.log(values);
         }
 
         if (event.target.name === 'body') {
             setValues({ ...values, body: event.target.value });
-            console.log(values);
         }
     };
 
@@ -119,9 +95,12 @@ const IndexPage = () => {
                     onChange={inputHandler}
                 ></Input>
             </InputsContainer>
-            <Button disabled={values.title.length && values.body.length ? false : true} onClick={submitClickHandler}>
-                Submit
-            </Button>
+            <Button
+                type="submit"
+                text="Submit"
+                disabled={values.title.length && values.body.length ? false : true}
+                click={submitClickHandler}
+            />
         </Layout>
     );
 };

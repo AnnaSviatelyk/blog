@@ -15,4 +15,5 @@ export type PostsState = {
     item: {} | null;
     error: string | null;
     postSuccess: boolean;
+    isModalShown: boolean;
 };

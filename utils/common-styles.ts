@@ -15,3 +15,10 @@ export const Heading2 = styled.h2`
     font-weight: 100;
     text-align: center;
 `;
+
+export const Label = styled.label`
+    margin-bottom: 12px;
+    font-size: 16px;
+    font-weight: 200;
+    font-family: sans-serif;
+`;

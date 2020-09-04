@@ -25,10 +25,10 @@ const ErrorContainer = styled.div`
     }
 `;
 
-const ErrorMessage = ({ errorMessage, click }) => (
+const ErrorMessage = ({ click }) => (
     <ErrorContainer>
         <span>Error!</span>
-        <p>{errorMessage}</p>
+        <p>Ooops, something went wrong! Pease try again later...</p>
         {/* <AuthBtn click={click}>Ok</AuthBtn> */}
     </ErrorContainer>
 );

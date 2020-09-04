@@ -7,7 +7,7 @@ const initialState: PostsState = {
     items: [],
     item: null,
     error: null,
-    postSuccess: false,
+    isModalShown: false,
 };
 
 const hydrate = (state, action) => {
@@ -15,6 +15,15 @@ const hydrate = (state, action) => {
         ...action.payload.posts,
     });
 };
+
+const backDropClick = (state) => {
+    return updateObj(state, {
+        isModalShown: false,
+        postSuccess: false,
+        error: null,
+    });
+};
+
 const getPostsStart = (state) => {
     return updateObj(state, {
         items: [],
@@ -36,12 +45,20 @@ const retrievePostSuccess = (state, action) => {
 
 const addPostSuccess = (state) => {
     return updateObj(state, {
-        postSuccess: true,
+        isModalShown: true,
     });
+};
+
+const addCommentSuccess = (state, action) => {
+    const updatedItem = { ...state.item };
+    updatedItem.comments.push(action.comment);
+
+    return updateObj(state, { item: updatedItem });
 };
 const requestFail = (state, action) => {
     return updateObj(state, {
         error: action.error,
+        isModalShown: true,
     });
 };
 
@@ -49,6 +66,8 @@ const reducer = (state = initialState, action) => {
     switch (action.type) {
         case HYDRATE:
             return hydrate(state, action);
+        case actionTypes.BACKDROP_CLICK:
+            return backDropClick(state);
         case actionTypes.GET_POSTS_START:
             return getPostsStart(state);
         case actionTypes.GET_POSTS_SUCCESS:
@@ -63,6 +82,11 @@ const reducer = (state = initialState, action) => {
             return requestFail(state, action);
         case actionTypes.ADD_POST_SUCCESS:
             return addPostSuccess(state);
+        case actionTypes.ADD_COMMENT_SUCCESS:
+            return addCommentSuccess(state, action);
+        case actionTypes.ADD_COMMENT_FAIL: {
+            return requestFail(state, action);
+        }
         default:
             return state;
     }

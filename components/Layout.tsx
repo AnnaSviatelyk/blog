@@ -1,7 +1,11 @@
 import React, { ReactNode } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Link from 'next/link';
 import Head from 'next/head';
 import styled from 'styled-components';
+import Modal from './Modal/Modal';
+import ErrorMessage from './ErrorMessage';
+import * as actions from '../redux/actions/index';
 
 type Props = {
     children?: ReactNode;
@@ -68,26 +72,49 @@ const Nav = styled.nav`
     }
 `;
 
-const Layout = ({ children, title = 'This is the default title' }: Props) => (
-    <div>
-        <Head>
-            <title>{title}</title>
-            <meta charSet="utf-8" />
-            <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        </Head>
-        <Header>
-            <Link href="/">
-                <Logo>MyBlog</Logo>
-            </Link>
-            <Nav>
-                <p>Have something to say?</p>
-                <Link href="/posts/new">
-                    <a>Create New Post</a>
+const Layout = ({ children, title = 'This is the default title' }: Props) => {
+    const dispatch = useDispatch();
+
+    const isError = useSelector((state) => {
+        return state.posts.error;
+    });
+
+    const isModalShown = useSelector((state) => {
+        return state.posts.isModalShown;
+    });
+
+    const backdropClickHandler = () => {
+        dispatch(actions.backDropClick());
+    };
+
+    const message = isError ? <ErrorMessage /> : <p>Your post was successfully published!</p>;
+
+    return (
+        <div>
+            <Head>
+                <title>{title}</title>
+                <meta charSet="utf-8" />
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+            </Head>
+            <Header>
+                <Link href="/">
+                    <Logo>MyBlog</Logo>
                 </Link>
-            </Nav>
-        </Header>
-        <ContentContainer>{children}</ContentContainer>
-    </div>
-);
+                <Nav>
+                    <p>Have something to say?</p>
+                    <Link href="/posts/new">
+                        <a>Create New Post</a>
+                    </Link>
+                </Nav>
+            </Header>
+            <ContentContainer>
+                <Modal show={isModalShown} backDropClick={backdropClickHandler}>
+                    {message}
+                </Modal>
+                {children}
+            </ContentContainer>
+        </div>
+    );
+};
 
 export default Layout;

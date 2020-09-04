@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Modal = styled.div`
+const ModalContainer = styled.div`
     width: 100%;
     height: 100%;
 
@@ -57,16 +57,11 @@ const Modal = ({ show, backDropClick, children }) => {
     }
 
     return (
-        <Modal>
+        <ModalContainer>
             <ModalBackdrop onClick={backDropClick} />
             <ModalBody className="Modal__body">{children}</ModalBody>
-        <Modal>
+        </ModalContainer>
     );
-};
-
-Modal.propTypes = {
-    show: PropTypes.bool,
-    backDropClick: PropTypes.func,
 };
 
 export default Modal;

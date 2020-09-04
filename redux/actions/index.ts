@@ -1,1 +1,1 @@
-export { getPosts, retrievePost, addPost } from './postsActions';
+export { getPosts, retrievePost, addPost, addComment, backDropClick } from './postsActions';
