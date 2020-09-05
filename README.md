@@ -14,6 +14,6 @@ npm run build
 npm run dev
 ```
 
-## Project website
+## Project's website
 
 https://blog-neon.vercel.app/
