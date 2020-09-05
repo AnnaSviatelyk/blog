@@ -16,4 +16,4 @@ npm run dev
 
 ## Project's website
 
-https://blog-neon.vercel.app
+https://blog-orcin-xi.vercel.app
