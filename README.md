@@ -13,3 +13,7 @@ npm run build
 
 npm run dev
 ```
+
+## Project website
+
+https://blog-neon.vercel.app/
