@@ -1,19 +1,18 @@
-import react, { useState } from 'react';
+import { useState } from 'react';
 import Layout from '../../../components/Layout';
 import Button from '../../../components/Button';
-import Modal from '../../../components/Modal/Modal';
-import ErrorMessage from '../../../components/ErrorMessage';
 import styled from 'styled-components';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Heading1, Label } from '../../../utils/common-styles';
 import * as actions from '../../../redux/actions/index';
 
-const InputsContainer = styled.div`
+type PropType = any;
+const InputsContainer = styled.div<PropType>`
     display: flex;
     flex-direction: column;
 `;
 
-const Input = styled.textarea`
+const Input = styled.textarea<PropType>`
     width: 500px;
     height: auto;
     max-height: 200px;
@@ -53,13 +52,9 @@ const IndexPage = () => {
         body: '',
     });
 
-    const error = useSelector((state) => {
-        return state.posts.error;
-    });
-
     const dispatch = useDispatch();
 
-    const inputHandler = (event) => {
+    const inputHandler = (event: any) => {
         if (event.target.name === 'title') {
             setValues({ ...values, title: event.target.value });
         }
@@ -96,7 +91,6 @@ const IndexPage = () => {
                 ></Input>
             </InputsContainer>
             <Button
-                type="submit"
                 text="Submit"
                 disabled={values.title.length && values.body.length ? false : true}
                 click={submitClickHandler}

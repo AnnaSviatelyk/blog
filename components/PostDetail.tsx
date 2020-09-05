@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { Post } from '../interfaces';
+import { PostInner } from '../interfaces';
 import styled from 'styled-components';
 import { Heading1 } from '../utils/common-styles';
+
 type PostDetailProps = {
-    item: Post;
+    item: PostInner;
 };
 
 const PostContainer = styled.div`

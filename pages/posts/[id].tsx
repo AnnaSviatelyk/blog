@@ -1,13 +1,12 @@
-import { GetStaticProps, GetStaticPaths } from 'next';
-
-import { Post } from '../../interfaces';
 import Layout from '../../components/Layout';
 import PostDetail from '../../components/PostDetail';
 import * as actions from '../../redux/actions/index';
 import { useSelector } from 'react-redux';
 import Comments from '../../components/Comments';
 import styled from 'styled-components';
+import { Comment } from '../../interfaces/index';
 import { Heading2 } from '../../utils/common-styles';
+import { RootState } from '../../redux/reducers/rootReducer';
 
 const CommentsContainer = styled.div`
     width: 50%;
@@ -15,19 +14,13 @@ const CommentsContainer = styled.div`
     padding: 24px;
     background-color: #fff;
 `;
-type Props = {
-    item?: Post;
-    errors?: string;
-};
 
-const StaticPropsDetail = ({ errors }: Props) => {
-    const item = useSelector((state) => {
+const StaticPropsDetail = () => {
+    const item = useSelector((state: RootState) => {
         return state.posts.item;
     });
 
-    const comments = item.comments;
-
-    console.log(comments);
+    const comments: Comment[] | [] = item ? item.comments : [];
 
     return (
         <Layout title={`${item ? item.title : 'User Detail'} | Next.js + TypeScript Example`}>
@@ -42,34 +35,8 @@ const StaticPropsDetail = ({ errors }: Props) => {
 
 export default StaticPropsDetail;
 
-StaticPropsDetail.getInitialProps = async ({ store, pathname, query }) => {
+StaticPropsDetail.getInitialProps = async ({ store, query }: { store: any; query: any }) => {
     const id = query.id;
 
     await store.dispatch(actions.retrievePost(id));
 };
-
-// export const getStaticPaths: GetStaticPaths = async () => {
-//     // Get the paths we want to pre-render based on users
-//     const paths = sampleUserData.map((user) => ({
-//         params: { id: user.id.toString() },
-//     }));
-
-//     // We'll pre-render only these paths at build time.
-//     // { fallback: false } means other routes should 404.
-//     return { paths, fallback: false };
-// };
-
-// // This function gets called at build time on server-side.
-// // It won't be called on client-side, so you can even do
-// // direct database queries.
-// export const getStaticProps: GetStaticProps = async ({ params }) => {
-//     try {
-//         const id = params?.id;
-//         const item = sampleUserData.find((data) => data.id === Number(id));
-//         // By returning { props: item }, the StaticPropsDetail component
-//         // will receive `item` as a prop at build time
-//         return { props: { item } };
-//     } catch (err) {
-//         return { props: { errors: err.message } };
-//     }
-// };

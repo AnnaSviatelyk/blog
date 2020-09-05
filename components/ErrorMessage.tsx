@@ -1,5 +1,4 @@
 import React from 'react';
-// import AuthBtn from '../Buttons/AuthBtns/AuthBtn/AuthBtn';
 import styled from 'styled-components';
 
 const ErrorContainer = styled.div`
@@ -25,11 +24,10 @@ const ErrorContainer = styled.div`
     }
 `;
 
-const ErrorMessage = ({ click }) => (
+const ErrorMessage = () => (
     <ErrorContainer>
         <span>Error!</span>
         <p>Ooops, something went wrong! Pease try again later...</p>
-        {/* <AuthBtn click={click}>Ok</AuthBtn> */}
     </ErrorContainer>
 );
 

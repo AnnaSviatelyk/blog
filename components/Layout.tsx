@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import Modal from './Modal/Modal';
 import ErrorMessage from './ErrorMessage';
 import * as actions from '../redux/actions/index';
+import { RootState } from '../redux/reducers/rootReducer';
 
 type Props = {
     children?: ReactNode;
@@ -75,11 +76,11 @@ const Nav = styled.nav`
 const Layout = ({ children, title = 'This is the default title' }: Props) => {
     const dispatch = useDispatch();
 
-    const isError = useSelector((state) => {
+    const isError = useSelector((state: RootState) => {
         return state.posts.error;
     });
 
-    const isModalShown = useSelector((state) => {
+    const isModalShown = useSelector((state: RootState) => {
         return state.posts.isModalShown;
     });
 

@@ -1,10 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-// type Props = {
-//     data: Post;
-// };
-
 const CommentContainer = styled.div`
     width: 100%;
     padding: 16px;
@@ -24,7 +20,7 @@ const CommentUser = styled.p`
 const CommentBody = styled.p`
     margin: 0;
 `;
-const CommentItem = ({ body, id }: { body: string; id: number }) => (
+const CommentItem = ({ body }: { body: string }) => (
     <CommentContainer>
         <CommentUser>Comment by: User</CommentUser>
         <CommentBody>{body}</CommentBody>

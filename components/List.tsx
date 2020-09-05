@@ -3,6 +3,8 @@ import PostItem from './PostItem';
 import { useSelector } from 'react-redux';
 import Button from './Button';
 import styled from 'styled-components';
+import { Post } from '../interfaces';
+import { RootState } from '../redux/reducers/rootReducer';
 
 const AllContentContainer = styled.div`
     margin-bottom: 40px;
@@ -39,7 +41,7 @@ const StyledLi = styled.li`
 const limit = 5;
 
 const List = () => {
-    const items = useSelector((state) => state.posts.items);
+    const items = useSelector((state: RootState) => state.posts.items);
     const [page, setPage] = useState(1);
     const offset = page * limit;
     const postsCount = items.length;
@@ -52,7 +54,7 @@ const List = () => {
     return (
         <AllContentContainer>
             <ul>
-                {items.slice(0, showingPostsCount).map((item) => (
+                {items.slice(0, showingPostsCount).map((item: Post) => (
                     <PostItemContainer key={item.id}>
                         <StyledLi>
                             <PostItem data={item} />

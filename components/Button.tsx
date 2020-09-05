@@ -1,4 +1,3 @@
-import react from 'react';
 import styled from 'styled-components';
 
 const ButtonStyled = styled.button`
@@ -25,7 +24,7 @@ const ButtonStyled = styled.button`
     }
 `;
 
-const Button = ({ text, disabled = false, click }: { text: String; disabled?: Boolean; click?: Function }) => (
+const Button = ({ text, disabled = false, click }: { text: string; disabled?: boolean; click?: any }) => (
     <ButtonStyled disabled={disabled} onClick={click}>
         {text}
     </ButtonStyled>

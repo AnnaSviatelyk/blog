@@ -51,7 +51,7 @@ const ModalBody = styled.div`
     }
 `;
 
-const Modal = ({ show, backDropClick, children }) => {
+const Modal = ({ show, backDropClick, children }: { show: boolean; backDropClick: any; children: any }) => {
     if (!show) {
         return null;
     }

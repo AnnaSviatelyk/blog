@@ -1,7 +1,18 @@
 import * as actionTypes from '../actions/actionTypes';
 import { HYDRATE } from 'next-redux-wrapper';
 import { updateObj } from '../../utils/utility';
-import { PostsState } from '../../interfaces';
+import { PostsState, PostInner } from '../../interfaces';
+import {
+    Hydrate,
+    GetPostsSuccess,
+    AddCommentSuccess,
+    RetrievePostSuccess,
+    AddCommentFail,
+    AddPostFail,
+    GetPostsFail,
+    RetrievePostFail,
+    ActionTypes,
+} from '../actions/types';
 
 const initialState: PostsState = {
     items: [],
@@ -10,13 +21,13 @@ const initialState: PostsState = {
     isModalShown: false,
 };
 
-const hydrate = (state, action) => {
+const hydrate = (state: PostsState, action: Hydrate) => {
     return updateObj(state, {
         ...action.payload.posts,
     });
 };
 
-const backDropClick = (state) => {
+const backDropClick = (state: PostsState) => {
     return updateObj(state, {
         isModalShown: false,
         postSuccess: false,
@@ -24,45 +35,48 @@ const backDropClick = (state) => {
     });
 };
 
-const getPostsStart = (state) => {
+const getPostsStart = (state: PostsState) => {
     return updateObj(state, {
         items: [],
         error: null,
     });
 };
 
-const getPostsSuccess = (state, action) => {
+const getPostsSuccess = (state: PostsState, action: GetPostsSuccess) => {
     return updateObj(state, {
         items: action.posts,
     });
 };
 
-const retrievePostSuccess = (state, action) => {
+const retrievePostSuccess = (state: PostsState, action: RetrievePostSuccess) => {
     return updateObj(state, {
         item: action.post,
     });
 };
 
-const addPostSuccess = (state) => {
+const addPostSuccess = (state: PostsState) => {
     return updateObj(state, {
         isModalShown: true,
     });
 };
 
-const addCommentSuccess = (state, action) => {
-    const updatedItem = { ...state.item };
+const addCommentSuccess = (state: PostsState, action: AddCommentSuccess) => {
+    if (!state.item) {
+        return;
+    }
+    const updatedItem: PostInner = { ...state.item };
     updatedItem.comments.push(action.comment);
 
     return updateObj(state, { item: updatedItem });
 };
-const requestFail = (state, action) => {
+const requestFail = (state: PostsState, action: AddCommentFail | AddPostFail | RetrievePostFail | GetPostsFail) => {
     return updateObj(state, {
         error: action.error,
         isModalShown: true,
     });
 };
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action: ActionTypes) => {
     switch (action.type) {
         case HYDRATE:
             return hydrate(state, action);

@@ -1,9 +1,10 @@
 import * as React from 'react';
-import Comment from './Comment';
+import CommentItem from './CommentItem';
 import AddComment from './AddComment';
+import { Comment } from '../interfaces';
 
-const Comments = ({ items }) => {
-    const allComments = items.map((item: object) => <Comment body={item.body} id={item.id} key={item.id} />);
+const Comments = ({ items }: { items: Comment[] }) => {
+    const allComments = items.map((item: Comment) => <CommentItem body={item.body} key={item.id} />);
     return (
         <div>
             {allComments}

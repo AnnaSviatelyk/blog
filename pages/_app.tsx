@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import App from 'next/app';
 import { wrapper } from '../redux/store';
 import { Global, css } from '@emotion/core';

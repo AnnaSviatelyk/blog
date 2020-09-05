@@ -1,10 +1,11 @@
-import react, { useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import Button from './Button';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import * as actions from '../redux/actions/index';
-const Input = styled.textarea`
+type PropType = any;
+const Input = styled.textarea<PropType>`
     width: 100%;
     height: auto;
     max-height: 100px;
@@ -37,7 +38,7 @@ const Input = styled.textarea`
 
 const AddComment = () => {
     const router = useRouter();
-    const id = parseInt(router.query.id);
+    const id = parseInt(Array.isArray(router.query.id) ? router.query.id[0] : router.query.id);
 
     const dispatch = useDispatch();
 
@@ -45,7 +46,7 @@ const AddComment = () => {
         body: '',
     });
 
-    const inputHandler = (event: Event) => {
+    const inputHandler = (event: any) => {
         setValue({ ...value, body: event.target.value });
     };
 

@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import List from '../components/List';
 import Layout from '../components/Layout';
 import * as actions from '../redux/actions/index';
@@ -13,7 +12,7 @@ const IndexPage = () => {
     );
 };
 
-IndexPage.getInitialProps = async ({ store }) => {
+IndexPage.getInitialProps = async ({ store }: { store: any }) => {
     await store.dispatch(actions.getPosts());
 };
 
