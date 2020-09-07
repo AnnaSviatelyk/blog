@@ -50,7 +50,7 @@ const Header = styled.header`
     }
 `;
 
-const Logo = styled.p`
+const Logo = styled.div`
     position: absolute;
     left: 120px;
     font-size: 24px;
